@@ -81,6 +81,18 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
+      {{- if .Values.initContainer }}
+      initContainer:
+        {{- range .Values.initContainer }}
+        - name: {{ .name }}
+          {{- if .image }}
+          image: {{ .image }}
+          {{- else }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          {{- end -}}
+          command: {{ .command }}
+        {{- end}}
+      {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       {{- with .Values.nodeSelector }}
       nodeSelector:

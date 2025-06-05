@@ -11,6 +11,13 @@ image:
   containerPort: 5555
 terminationGracePeriodSeconds: 60
 
+hooks:
+  pre-install:
+    enabled: false
+    name: init-db
+    command: "sleep 60"
+    image: ""
+
 extraEnvs: []
 envFrom: []
 
