@@ -15,6 +15,14 @@ spec:
         {{- include "application.labels" . | nindent 4 }}
     spec:
       restartPolicy: OnFailure
+      {{- if .Values.secretMounts }}
+      volumes: 
+        {{- range .Values.secretMounts }}
+        - name: {{ .name }}
+          secret:
+            secretName: {{ .secretName }}
+        {{- end }}
+      {{- end }}
       containers:
       - name: {{ .Values.hooks.pre-install.name }}
         {{- if .Values.hooks.pre-install.image }}
@@ -23,4 +31,14 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         {{- end }}
         command: {{ .Values.hooks.pre-install.command }}
+        {{- if .Values.secretMounts }}
+        volumeMounts: 
+          {{- range .Values.secretMounts }}
+          - name: {{ .name }}
+            mountPath: {{ .path }}
+            {{- if .subPath }}
+            subPath: {{ .subPath }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
 {{- end }}
