@@ -1,4 +1,4 @@
-{{- if .Values.hooks.pre-install.enabled -}}
+{{- if .Values.hooks.pre-install.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
