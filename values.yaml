@@ -12,7 +12,7 @@ image:
 terminationGracePeriodSeconds: 60
 
 hooks:
-  pre-install:
+  pre_install:
     enabled: false
     name: init-db
     command: "sleep 60"

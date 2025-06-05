@@ -1,4 +1,4 @@
-{{- if .Values.hooks.pre-install.enabled }}
+{{- if .Values.hooks.pre_install.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -24,13 +24,13 @@ spec:
         {{- end }}
       {{- end }}
       containers:
-      - name: {{ .Values.hooks.pre-install.name }}
-        {{- if .Values.hooks.pre-install.image }}
-        image: {{ .Values.hooks.pre-install.image }}
+      - name: {{ .Values.hooks.pre_install.name }}
+        {{- if .Values.hooks.pre_install.image }}
+        image: {{ .Values.hooks.pre_install.image }}
         {{- else }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         {{- end }}
-        command: {{ .Values.hooks.pre-install.command }}
+        command: {{ .Values.hooks.pre_install.command }}
         {{- if .Values.secretMounts }}
         volumeMounts: 
           {{- range .Values.secretMounts }}
